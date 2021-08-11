@@ -10,7 +10,7 @@ pandas
 requests
 sendgrid==6.6.0
 gunicorn # heroku wants this to run our web app
-
+python-dotenv
 Flask
 #
 # TEST
