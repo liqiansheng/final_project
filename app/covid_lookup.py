@@ -17,15 +17,14 @@ totaldeath_list = []
 totalnewcase_list = []
 totalnewdeath_list = []
 
+totalvacdistributed_list = []
+vacinitiatedratio_list = []
+vaccompletedratio_list = []
 
 
 url = f"https://api.covidactnow.org/v2/states.json?apiKey=6a98cc92b3324c62aef26c681936f73c"
 response = requests.get(url)
 parsed_response = json.loads(response.text)
-print(parsed_response[25])
-print(parsed_response[0].keys())
-print(parsed_response[25]["state"])
-print(type(parsed_response[0]["state"]))
 
 # append states to the list
 for state in parsed_response:
@@ -38,6 +37,9 @@ for state in parsed_response:
     totalnewcase_list.append(state["actuals"]["newCases"])
     totalnewdeath_list.append(state["actuals"]["newDeaths"])
 
+    totalvacdistributed_list.append(state["actuals"]["vaccinesDistributed"])
+    vacinitiatedratio_list.append(state["metrics"]["vaccinationsInitiatedRatio"])
+    vaccompletedratio_list.append(state["metrics"]["vaccinationsCompletedRatio"])
 
 
 
@@ -49,6 +51,11 @@ totalcase_listsort = sorted(totalcase_list,reverse = True)
 totalnewcase_listsort = sorted(totalnewcase_list, reverse = True)
 totaldeath_listsort = sorted(totaldeath_list,reverse = True)
 totalnewdeath_listsort = sorted(totalnewdeath_list,reverse = True)
+
+totalvacdistributed_listsort = sorted(totalvacdistributed_list, reverse = True)
+vacinitiatedratio_listsort = sorted(vacinitiatedratio_list,reverse = True)
+vaccompletedratio_listsort = sorted(vaccompletedratio_list, reverse = True)
+
 # ask user for the states
 while True:
   user_input = input("Please name a state you are interested in. Enter 'Done' to skip.")
@@ -73,8 +80,8 @@ for selected_state in user_statepool:
   print("State population:",parsed_response[state_order]["population"],"(Rank",population_listsort.index             (parsed_response[state_order]["population"])+1,"in the US)")
 
   print("The case density in",selected_state,"is:",parsed_response[state_order]["metrics"]["caseDensity"],"(Rank",casedensity_listsort.index(parsed_response[state_order]["metrics"]["caseDensity"])+1,"in the US)")
-  print("-----------------------CASE & DEATH-----------------------")
 
+  print("-----------------------CASE & DEATH-----------------------")
   print(selected_state,"has",parsed_response[state_order]["actuals"]["cases"],"total cases","(Rank",totalcase_listsort.index(parsed_response[state_order]["actuals"]["cases"])+1,"in the US)")
 
   print(selected_state,"has",parsed_response[state_order]["actuals"]["deaths"],"total death","(Rank",totaldeath_listsort.index(parsed_response[state_order]["actuals"]["deaths"])+1,"in the US)")
@@ -83,9 +90,12 @@ for selected_state in user_statepool:
 
   print(selected_state,"has",parsed_response[state_order]["actuals"]["newDeaths"],"new deaths","(Rank",totalnewdeath_listsort.index(parsed_response[state_order]["actuals"]["newDeaths"])+1,"in the US)")
   print("-------------------------VACCINES-------------------------")
-  print(selected_state,"has",parsed_response[state_order]["actuals"]["vaccinesDistributed"],"total vaccine distributed")
-  print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsInitiatedRatio"])
-  print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsCompletedRatio"])
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["vaccinesDistributed"],"total vaccine distributed","(Rank",totalvacdistributed_listsort.index(parsed_response[state_order]["actuals"]["vaccinesDistributed"])+1,"in the US)")
+
+  print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsInitiatedRatio"],"(Rank",vacinitiatedratio_listsort.index(parsed_response[state_order]["metrics"]["vaccinationsInitiatedRatio"])+1,"in the US)")
+  
+  print("The vaccination completed ratio is:",parsed_response[state_order]["metrics"]["vaccinationsCompletedRatio"],"(Rank",vaccompletedratio_listsort.index(parsed_response[state_order]["metrics"]["vaccinationsCompletedRatio"])+1,"in the US)")
+
   print("----------------------ICU Information---------------------")
   print(selected_state,"has",parsed_response[state_order]["actuals"]["icuBeds"]["capacity"],"total ICU beds")
   print(selected_state,"has",parsed_response[state_order]["actuals"]["icuBeds"]["currentUsageTotal"],"ICU beds in current use")
