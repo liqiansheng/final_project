@@ -18,3 +18,8 @@ print(parsed_response[25])
 print(parsed_response[0].keys())
 print(parsed_response[25]["state"])
 print(type(parsed_response[0]["state"]))
+
+# append states to the list
+for state in parsed_response:
+  statepool.append(state["state"])
+
