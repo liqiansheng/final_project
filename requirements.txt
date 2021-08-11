@@ -1,0 +1,19 @@
+# this is the requirements.txt file...
+
+#
+# DEVELOPMENT / PRODUCTION
+#
+
+python-dotenv
+pgeocode
+pandas
+requests
+sendgrid==6.6.0
+gunicorn # heroku wants this to run our web app
+python-dotenv
+Flask
+#
+# TEST
+#
+
+pytest
