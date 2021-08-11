@@ -23,3 +23,12 @@ print(type(parsed_response[0]["state"]))
 for state in parsed_response:
   statepool.append(state["state"])
 
+# ask user for the states
+while True:
+  user_input = input("Please name a state you are interested in. Enter 'Done' to skip.")
+  if user_input.upper() == "DONE":
+    break
+  elif user_input.upper() not in statepool:
+    print("Please enter a valid state abbreviation. If you are not sure, please go to the 'Abbrevation' page.")
+  else:
+    user_statepool.append(user_input.upper())
