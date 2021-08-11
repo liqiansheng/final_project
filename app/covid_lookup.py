@@ -9,6 +9,14 @@ import os
 user_statepool = []
 statepool = []
 api_key = os.getenv("USER_API_KEY")
+population_list = []
+casedensity_list = []
+
+totalcase_list = []
+totaldeath_list = []
+totalnewcase_list = []
+totalnewdeath_list = []
+
 
 
 url = f"https://api.covidactnow.org/v2/states.json?apiKey=6a98cc92b3324c62aef26c681936f73c"
@@ -21,8 +29,26 @@ print(type(parsed_response[0]["state"]))
 
 # append states to the list
 for state in parsed_response:
-  statepool.append(state["state"])
+    statepool.append(state["state"])
+    population_list.append(state["population"])
+    casedensity_list.append(state["metrics"]["caseDensity"])
 
+    totalcase_list.append(state["actuals"]["cases"])
+    totaldeath_list.append(state["actuals"]["deaths"])
+    totalnewcase_list.append(state["actuals"]["newCases"])
+    totalnewdeath_list.append(state["actuals"]["newDeaths"])
+
+
+
+
+# sort list
+population_listsort = sorted(population_list,reverse = True)
+casedensity_listsort = sorted(casedensity_list,reverse = True)
+
+totalcase_listsort = sorted(totalcase_list,reverse = True)
+totalnewcase_listsort = sorted(totalnewcase_list, reverse = True)
+totaldeath_listsort = sorted(totaldeath_list,reverse = True)
+totalnewdeath_listsort = sorted(totalnewdeath_list,reverse = True)
 # ask user for the states
 while True:
   user_input = input("Please name a state you are interested in. Enter 'Done' to skip.")
@@ -44,13 +70,18 @@ for selected_state in user_statepool:
   state_order = statepool.index(selected_state) 
   print("Date:",parsed_response[state_order]["lastUpdatedDate"])
   print("State:",selected_state)
-  print("State population:",parsed_response[state_order]["population"])
-  print("The case density in",selected_state,"is:",parsed_response[state_order]["metrics"]["caseDensity"])
+  print("State population:",parsed_response[state_order]["population"],"(Rank",population_listsort.index             (parsed_response[state_order]["population"])+1,"in the US)")
+
+  print("The case density in",selected_state,"is:",parsed_response[state_order]["metrics"]["caseDensity"],"(Rank",casedensity_listsort.index(parsed_response[state_order]["metrics"]["caseDensity"])+1,"in the US)")
   print("-----------------------CASE & DEATH-----------------------")
-  print(selected_state,"has",parsed_response[state_order]["actuals"]["cases"],"total cases")
-  print(selected_state,"has",parsed_response[state_order]["actuals"]["deaths"],"total death")
-  print(selected_state,"has",parsed_response[state_order]["actuals"]["newCases"],"new cases")
-  print(selected_state,"has",parsed_response[state_order]["actuals"]["newDeaths"],"new deaths")
+
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["cases"],"total cases","(Rank",totalcase_listsort.index(parsed_response[state_order]["actuals"]["cases"])+1,"in the US)")
+
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["deaths"],"total death","(Rank",totaldeath_listsort.index(parsed_response[state_order]["actuals"]["deaths"])+1,"in the US)")
+
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["newCases"],"new cases","(Rank",totalnewcase_listsort.index(parsed_response[state_order]["actuals"]["newCases"])+1,"in the US)")
+
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["newDeaths"],"new deaths","(Rank",totalnewdeath_listsort.index(parsed_response[state_order]["actuals"]["newDeaths"])+1,"in the US)")
   print("-------------------------VACCINES-------------------------")
   print(selected_state,"has",parsed_response[state_order]["actuals"]["vaccinesDistributed"],"total vaccine distributed")
   print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsInitiatedRatio"])
