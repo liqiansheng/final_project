@@ -32,3 +32,7 @@ while True:
     print("Please enter a valid state abbreviation. If you are not sure, please go to the 'Abbrevation' page.")
   else:
     user_statepool.append(user_input.upper())
+
+# Confirm states
+for user_state in user_statepool:
+  print("You chose:",user_state)
