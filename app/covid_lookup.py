@@ -36,3 +36,29 @@ while True:
 # Confirm states
 for user_state in user_statepool:
   print("You chose:",user_state)
+
+
+# Output
+for selected_state in user_statepool:
+  print("--------------------Basic Information---------------------")
+  state_order = statepool.index(selected_state) 
+  print("Date:",parsed_response[state_order]["lastUpdatedDate"])
+  print("State:",selected_state)
+  print("State population:",parsed_response[state_order]["population"])
+  print("The case density in",selected_state,"is:",parsed_response[state_order]["metrics"]["caseDensity"])
+  print("-----------------------CASE & DEATH-----------------------")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["cases"],"total cases")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["deaths"],"total death")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["newCases"],"new cases")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["newDeaths"],"new deaths")
+  print("-------------------------VACCINES-------------------------")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["vaccinesDistributed"],"total vaccine distributed")
+  print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsInitiatedRatio"])
+  print("The vaccination initiated ratio is:",parsed_response[state_order]["metrics"]["vaccinationsCompletedRatio"])
+  print("----------------------ICU Information---------------------")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["icuBeds"]["capacity"],"total ICU beds")
+  print(selected_state,"has",parsed_response[state_order]["actuals"]["icuBeds"]["currentUsageTotal"],"ICU beds in current use")
+  print("The ratio of ICU beds currently in use is:",parsed_response[state_order]["metrics"]["icuCapacityRatio"])
+  print(selected_state,"has",parsed_response[state_order]["metrics"]["icuHeadroomDetails"]["currentIcuCovid"],"COVID patients in ICU")
+  print(selected_state,"has",parsed_response[state_order]["metrics"]["icuHeadroomDetails"]["currentIcuNonCovid"],"non-COVID patients in ICU")
+  print("-----------------------------------------------------------\n\n\n\n\n")
