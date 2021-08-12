@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h2>Covid Results </h2>
+
+    <p>State Code:{{user_input.upper()}}</p>
+        <!-- TODO: consider using a table instead of a list -->
+    <!-- TODO: consider adding images using the provided icon urls -->
+   
+    <ul>
+        {% for statement in results %}
+            <li>{{statement}}</li>
+        {% endfor %}
+        </ul>
+   
+
+{% endblock %}

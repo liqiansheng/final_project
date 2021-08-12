@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h2>Covid Form</h2>
+
+    <p>Request a daily update for the Covid Cases...</p>
+
+    <form action="/covid/result" method="POST">
+
+        <label>State Abbreviation:</label>
+        <input type="text" name="state_abbrev">
+        <br>
+
+        <button>Submit</button>
+    </form>
+
+{% endblock %}
