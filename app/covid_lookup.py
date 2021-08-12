@@ -57,13 +57,6 @@ for state in parsed_response:
     covidicu_list.append(state["metrics"]["icuHeadroomDetails"]["currentIcuCovid"])
     noncovidicu_list.append(state["metrics"]["icuHeadroomDetails"]["currentIcuNonCovid"])
 
-
-# print(statepool[25])
-# print(statepool)
-# print(totalicubed_list)
-# print(icubeduse_list)
-# print(icubedratio_list)
-# sort list
 population_listsort = sorted(population_list,reverse = True)
 casedensity_listsort = sorted(casedensity_list,reverse = True)
 
@@ -83,8 +76,6 @@ covidicu_listsort = sorted(covidicu_list, reverse = True)
 noncovidicu_listsort = sorted(noncovidicu_list, reverse = True)
 
 
-
-
 # ask user for the states
 while True:
   user_input = input("Please name a state you are interested in. Enter 'Done' to skip.")
@@ -99,6 +90,8 @@ while True:
 for user_state in user_statepool:
   print("You chose:",user_state)
 
+# ask user if they like an email copy
+email_option = input("Would you like an e-mail copy of the result?(yes/no)")
 
 # Output
 for selected_state in user_statepool:
