@@ -30,3 +30,13 @@ def hello_world():
     # return message
     return render_template("hello.html", message=message)
 
+@home_routes.route("/abbreviation")
+def abbreviation():
+    print("ABBREVIATION...")
+    return render_template("abbreviation.html")
+
+@home_routes.route("/data_def.html")
+def data_def():
+    print("DATA DEF...")
+    return render_template("data_def.html")
+
